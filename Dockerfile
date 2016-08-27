@@ -23,6 +23,6 @@ RUN apk update \
 	&& apk del .build-php
 
 
-COPY files/*.ini /usr/local/etc/php/conf.d/
+COPY files/10-opcache.ini files/40-apcu.ini /usr/local/etc/php/conf.d/
 RUN mkdir -p /etc/php.d/
 COPY opcache*.blacklist /etc/php.d/
