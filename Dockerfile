@@ -27,5 +27,6 @@ RUN apk update \
 COPY files/*.ini /usr/local/etc/php/conf.d/
 RUN mkdir -p /etc/php.d/ \
 	&& rm -f /usr/local/etc/php/conf.d/docker-php-ext-apc.ini \
-	&& rm -f /usr/local/etc/php/conf.d/docker-php-ext-apcu.ini
+	&& rm -f /usr/local/etc/php/conf.d/docker-php-ext-apcu.ini \
+	&& rm -f /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini
 COPY files/opcache*.blacklist /etc/php.d/
