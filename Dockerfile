@@ -4,7 +4,7 @@ MAINTAINER Foxboxsnet
 
 # Environment variable
 ENV MYSQL_VERSION 10.1.14-r3
-ENV APCU_VERSION 5.1.3
+ENV APCU_VERSION 5.1.5
 ENV APCU_BC_VERSION 1.0.3
 
 
@@ -12,6 +12,7 @@ RUN apk update \
 	&& apk add --no-cache --virtual .build-php \
 		$PHPIZE_DEPS \
 		mysql \
+		sed \
 	&& docker-php-ext-install \
 		mysqli \
 		mbstring \
