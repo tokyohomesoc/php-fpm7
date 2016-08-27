@@ -11,7 +11,7 @@ ENV APCU_BC_VERSION 1.0.3
 RUN apk update \
 	&& apk add --no-cache --virtual .build-php \
 		$PHPIZE_DEPS \
-		mysql \
+		mysql=$MYSQL_VERSION \
 		sed \
 	&& docker-php-ext-install \
 		mysqli \
