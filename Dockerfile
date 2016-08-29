@@ -8,7 +8,9 @@ ARG APCU_VERSION=5.1.5
 ARG APCU_BC_VERSION=1.0.3
 ARG PHP-FPM_CONF_FILE=/usr/local/etc/php-fpm.d/www.conf
 
-RUN apk update \
+RUN addgroup -g 1000 nginx \
+	&& adduser -u 1001 -D -S -h /var/cache/nginx -s /sbin/nologin -G nginx nginx \
+	&& apk update \
 	&& apk add --no-cache --virtual .build-php \
 		$PHPIZE_DEPS \
 		mysql=$MYSQL_VERSION \
