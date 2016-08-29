@@ -8,7 +8,7 @@ ARG APCU_VERSION=5.1.5
 ARG APCU_BC_VERSION=1.0.3
 ARG PHP-FPM_CONF_FILE=/usr/local/etc/php-fpm.d/www.conf
 
-RUN && addgroup -g 100 -S nginx \
+RUN addgroup -g 100 -S nginx \
 	&& adduser -u 100 -D -S -G nginx nginx \
 	&& apk update \
 	&& apk add --no-cache --virtual .build-php \
