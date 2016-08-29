@@ -3,12 +3,14 @@ FROM php:7.0.10-fpm-alpine
 MAINTAINER Foxboxsnet
 
 # Environment variable
-ENV MYSQL_VERSION 10.1.14-r3
-ENV APCU_VERSION 5.1.5
-ENV APCU_BC_VERSION 1.0.3
+ARG MYSQL_VERSION=10.1.14-r3
+ARG APCU_VERSION=5.1.5
+ARG APCU_BC_VERSION=1.0.3
+ARG PHP-FPM_CONF_FILE=/usr/local/etc/php-fpm.d/www.conf
 
-
-RUN apk update \
+RUN && addgroup -g 100 -S nginx \
+	&& adduser -u 100 -D -S -G nginx nginx \
+	&&apk update \
 	&& apk add --no-cache --virtual .build-php \
 		$PHPIZE_DEPS \
 		mysql=$MYSQL_VERSION \
@@ -21,6 +23,8 @@ RUN apk update \
 	&& docker-php-ext-enable apcu \
 	&& pecl install apcu_bc-$APCU_BC_VERSION \
 	&& docker-php-ext-enable apc \
+	&&  sed -e "s/user = www-data/user = nginx/g" \
+	&&  sed -e "s/group = www-data/group = nginx/g" \
 	&& apk del .build-php
 
 
