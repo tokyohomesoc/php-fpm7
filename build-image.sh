@@ -17,4 +17,3 @@ docker build --no-cache -t ${IMAGE} .
 
 docker stop test	> /dev/null
 docker rm test		> /dev/null
-../run.sh ${IMAGE}

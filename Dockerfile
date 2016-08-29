@@ -10,7 +10,7 @@ ARG PHP-FPM_CONF_FILE=/usr/local/etc/php-fpm.d/www.conf
 
 RUN && addgroup -g 100 -S nginx \
 	&& adduser -u 100 -D -S -G nginx nginx \
-	&&apk update \
+	&& apk update \
 	&& apk add --no-cache --virtual .build-php \
 		$PHPIZE_DEPS \
 		mysql=$MYSQL_VERSION \
