@@ -23,8 +23,8 @@ RUN && addgroup -g 100 -S nginx \
 	&& docker-php-ext-enable apcu \
 	&& pecl install apcu_bc-$APCU_BC_VERSION \
 	&& docker-php-ext-enable apc \
-	&&  sed -e "s/user = www-data/user = nginx/g" \
-	&&  sed -e "s/group = www-data/group = nginx/g" \
+	&& sed -e "s/user = www-data/user = nginx/g" $PHP-FPM_CONF_FILE \
+	&& sed -e "s/group = www-data/group = nginx/g" $PHP-FPM_CONF_FILE \
 	&& apk del .build-php
 
 COPY files/*.ini /usr/local/etc/php/conf.d/
