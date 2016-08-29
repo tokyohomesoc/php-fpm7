@@ -27,7 +27,6 @@ RUN && addgroup -g 100 -S nginx \
 	&&  sed -e "s/group = www-data/group = nginx/g" \
 	&& apk del .build-php
 
-
 COPY files/*.ini /usr/local/etc/php/conf.d/
 RUN mkdir -p /etc/php.d/ \
 	&& rm -f /usr/local/etc/php/conf.d/docker-php-ext-apc.ini \
