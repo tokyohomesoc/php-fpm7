@@ -8,9 +8,7 @@ ARG APCU_VERSION=5.1.5
 ARG APCU_BC_VERSION=1.0.3
 ARG PHP-FPM_CONF_FILE=/usr/local/etc/php-fpm.d/www.conf
 
-RUN addgroup -g 1000 nginx \
-	&& adduser -u 1001 -D -S -h /var/cache/nginx -s /sbin/nologin -G nginx nginx \
-	&& apk update \
+RUN apk update \
 	&& apk add --no-cache --virtual .build-php \
 		$PHPIZE_DEPS \
 		mysql=$MYSQL_VERSION \
@@ -31,7 +29,3 @@ RUN mkdir -p /etc/php.d/ \
 	&& rm -f /usr/local/etc/php/conf.d/docker-php-ext-apcu.ini \
 	&& rm -f /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini
 COPY files/opcache*.blacklist /etc/php.d/
-COPY docker-entrypoint.sh /
-
-ENTRYPOINT [ "/docker-entrypoint.sh" ]
-CMD ["php", "-a"]
