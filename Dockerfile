@@ -8,9 +8,7 @@ ARG APCU_VERSION=5.1.5
 ARG APCU_BC_VERSION=1.0.3
 ARG PHP-FPM_CONF_FILE=/usr/local/etc/php-fpm.d/www.conf
 
-RUN addgroup -g 1000 -S nginx \
-	&& adduser -u 1000 -D -S -G nginx nginx \
-	&& apk update \
+RUN apk update \
 	&& apk add --no-cache --virtual .build-php \
 		$PHPIZE_DEPS \
 		mysql=$MYSQL_VERSION \
@@ -23,8 +21,6 @@ RUN addgroup -g 1000 -S nginx \
 	&& docker-php-ext-enable apcu \
 	&& pecl install apcu_bc-$APCU_BC_VERSION \
 	&& docker-php-ext-enable apc \
-	&& sed -e "s/user = www-data/user = nginx/g" $PHP-FPM_CONF_FILE \
-	&& sed -e "s/group = www-data/group = nginx/g" $PHP-FPM_CONF_FILE \
 	&& apk del .build-php
 
 COPY files/*.ini /usr/local/etc/php/conf.d/
