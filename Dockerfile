@@ -34,3 +34,4 @@ COPY files/opcache*.blacklist /etc/php.d/
 COPY docker-entrypoint.sh /
 
 ENTRYPOINT [ "/docker-entrypoint.sh" ]
+CMD ["php", "-a"]
