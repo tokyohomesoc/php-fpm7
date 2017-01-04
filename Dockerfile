@@ -1,10 +1,11 @@
-FROM php:7.0.10-fpm-alpine
+FROM php:7.1.0-fpm-alpine
 
-MAINTAINER Foxboxsnet
+MAINTAINER HomeSOC Tokyo <github@homesoc.tokyo>
 
 # Environment variable
-ARG MYSQL_VERSION=10.1.14-r3
-ARG APCU_VERSION=5.1.5
+ARG MYSQL_VERSION=10.1.19-r0
+
+ARG APCU_VERSION=5.1.7
 ARG APCU_BC_VERSION=1.0.3
 ARG PHP-FPM_CONF_FILE=/usr/local/etc/php-fpm.d/www.conf
 
